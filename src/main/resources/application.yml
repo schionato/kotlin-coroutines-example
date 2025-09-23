@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: coroutines_examples
+
+external:
+  news:
+    mode: newsdataio
+    newsdataio:
+      url: https://newsdata.io/api/1/news
+      token: ${NEWSDATAIO_TOKEN}
+      size: 10
+  weather:
+    url: https://api.openweathermap.org/data/2.5/weather
+    token: ${WEATHER_TOKEN}
