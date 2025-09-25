@@ -7,8 +7,16 @@ import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 
-@ConditionalOnProperty(name = ["external.news.mode"], havingValue = "newsdataio", matchIfMissing = false)
-@FeignClient(name = "news-data-io", url = "\${external.news.newsdataio.url}", configuration = [NewsDataIOConfig::class])
+@ConditionalOnProperty(
+    name = ["external.news.mode"],
+    havingValue = "newsdataio",
+    matchIfMissing = false
+)
+@FeignClient(
+    name = "news-data-io",
+    url = "\${external.news.newsdataio.url}",
+    configuration = [NewsDataIOConfig::class]
+)
 interface NewsDataIO : NewsClient {
 
     @Headers(

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component
 @ConditionalOnProperty(name = ["external.news.mode"], havingValue = "fallback", matchIfMissing = false)
 class NewsFallBack : NewsClient {
 
-    override fun fetch(city: String) = NewsDataIOResponse(listOf())
+    override fun fetch(city: String) = NewsDataIOResponse.empty()
 
 }

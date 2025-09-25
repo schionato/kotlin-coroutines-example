@@ -12,3 +12,16 @@ external:
   weather:
     url: https://api.openweathermap.org/data/2.5/weather
     token: ${WEATHER_TOKEN}
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 1
+        eventConsumerBufferSize: 10

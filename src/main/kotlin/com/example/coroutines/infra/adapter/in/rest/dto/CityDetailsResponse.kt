@@ -16,13 +16,16 @@ data class CityDetailsResponse(
     companion object {
 
         fun of(cityDetails: CityDetails): CityDetailsResponse {
+            val (latitude, longitude) = cityDetails.coordinates
+            val (minTemperature, maxTemperature, wind) = cityDetails.weather
+
             return CityDetailsResponse(
                 name = cityDetails.name,
-                latitude = cityDetails.coordinates.latitude,
-                longitude = cityDetails.coordinates.longitude,
-                wind = cityDetails.weather.wind,
-                minTemperature = cityDetails.weather.minTemperature,
-                maxTemperature = cityDetails.weather.maxTemperature,
+                latitude = latitude,
+                longitude = longitude,
+                wind = wind,
+                minTemperature = minTemperature,
+                maxTemperature = maxTemperature,
                 news = CityArticle.ofAll(cityDetails.news)
             )
         }
