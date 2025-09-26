@@ -1,9 +1,9 @@
 package com.example.coroutines.application.service
 
 import com.example.coroutines.application.port.`in`.FetchUserDetailsInputPort
-import com.example.coroutines.application.port.ou.FindCityCoordinatesOutput
-import com.example.coroutines.application.port.ou.FindCityNewsOutput
-import com.example.coroutines.application.port.ou.FindCityWeatherOutput
+import com.example.coroutines.application.port.ou.FindCityGeoRefOutputPort
+import com.example.coroutines.application.port.ou.FindCityNewsOutputPort
+import com.example.coroutines.application.port.ou.FindCityWeatherOutputPort
 import com.example.coroutines.domain.CityDetails
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service
 
 @Service("async")
 class CityDetailsServiceAsync(
-    private val findCityWeatherOutput: FindCityWeatherOutput,
-    private val findCityCoordinatesOutput: FindCityCoordinatesOutput,
-    private val findNewsOutput: FindCityNewsOutput
+    private val findCityWeatherOutput: FindCityWeatherOutputPort,
+    private val findCityGeoRefOutputPort: FindCityGeoRefOutputPort,
+    private val findNewsOutput: FindCityNewsOutputPort
 ) : FetchUserDetailsInputPort {
 
     private val logger = LoggerFactory.getLogger(CityDetailsServiceAsync::class.java)
@@ -27,7 +27,7 @@ class CityDetailsServiceAsync(
         }
 
         val coordinates = async {
-            findCityCoordinatesOutput.filteringBy(query)
+            findCityGeoRefOutputPort.filteringBy(query)
         }
 
         val news = async {

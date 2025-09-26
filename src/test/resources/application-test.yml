@@ -1,0 +1,10 @@
+# application configs
+application:
+  ports:
+    output:
+      geo:
+        adapter: fallback #options [nominatim, fallback]
+      news:
+        adapter: fallback #options [newsdataio, fallback]
+      weather:
+        adapter: fallback #options [openweather, fallback]

@@ -2,21 +2,31 @@ spring:
   application:
     name: coroutines_examples
 
+# application configs
+application:
+  ports:
+    output:
+      geo:
+        adapter: ${OUTPUT_PORT_SELECTED_GEO} #options [nominatim, fallback]
+      news:
+        adapter: ${OUTPUT_PORT_SELECTED_NEWS} #options [newsdataio, fallback]
+      weather:
+        adapter: ${OUTPUT_PORT_SELECTED_WEATHER} #options [openweather, fallback]
+
 # external endpoints configs
 external:
   news:
-    mode: fallback #options [newsdataio, fallback]
     newsdataio:
       url: https://newsdata.io/api/1/news
       token: ${NEWSDATAIO_TOKEN}
       size: 10
   geo:
-    mode: nominatim #options [nominatim, fallback]
     nominatim:
       url: https://nominatim.openstreetmap.org/
   weather:
-    url: https://api.openweathermap.org/data/2.5/weather
-    token: ${WEATHER_TOKEN}
+    openweather:
+      url: https://api.openweathermap.org/data/2.5/weather
+      token: ${WEATHER_TOKEN}
 
 # circuit breaker - resilience4j
 resilience4j:

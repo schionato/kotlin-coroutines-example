@@ -2,7 +2,7 @@ package com.example.coroutines.application.port.ou
 
 import com.example.coroutines.domain.Article
 
-interface FindCityNewsOutput {
+interface FindCityNewsOutputPort {
 
     fun filteringBy(query: String): List<Article>
 

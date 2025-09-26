@@ -1,4 +1,4 @@
-package com.example.coroutines.infra.adapter.ou.rest.client.news.newsdataio
+package com.example.coroutines.infra.adapter.ou.rest.news.newsdataio
 
 data class NewsDataIOResponse(val results: List<NewsDataIOArticle>) {
 

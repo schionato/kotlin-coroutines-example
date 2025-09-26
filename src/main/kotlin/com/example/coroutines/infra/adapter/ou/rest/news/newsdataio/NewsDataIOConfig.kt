@@ -1,4 +1,4 @@
-package com.example.coroutines.infra.adapter.ou.rest.client.news.newsdataio
+package com.example.coroutines.infra.adapter.ou.rest.news.newsdataio
 
 import feign.RequestInterceptor
 import feign.RequestTemplate

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController
 enum class FetchType {
     SYNC,
     ASYNC,
-    PARALLEL
+    SUSPENDED,
+    PARALLEL,
+    PARALLEL_AND_SUSPENDED
 }
 
 @RestController
@@ -20,6 +22,8 @@ class CityDetailsController(
     @param:Qualifier("sync") val fetchUserDetailsInputPortSync: FetchUserDetailsInputPort,
     @param:Qualifier("async") val fetchUserDetailsInputPortAsync: FetchUserDetailsInputPort,
     @param:Qualifier("parallel") val fetchUserDetailsInputPortParallel: FetchUserDetailsInputPort,
+    @param:Qualifier("suspended") val fetchUserDetailsInputPortSuspended: FetchUserDetailsInputPort,
+    @param:Qualifier("suspendedAndParallel") val fetchUserDetailsInputPortParallelAndSuspended: FetchUserDetailsInputPort,
 ) {
 
     @GetMapping
@@ -31,6 +35,8 @@ class CityDetailsController(
             FetchType.SYNC -> fetchUserDetailsInputPortSync.filteringBy(query)
             FetchType.ASYNC -> fetchUserDetailsInputPortAsync.filteringBy(query)
             FetchType.PARALLEL -> fetchUserDetailsInputPortParallel.filteringBy(query)
+            FetchType.PARALLEL_AND_SUSPENDED -> fetchUserDetailsInputPortParallelAndSuspended.filteringBy(query)
+            FetchType.SUSPENDED -> fetchUserDetailsInputPortSuspended.filteringBy(query)
         }
         return CityDetailsResponse.of(found)
     }

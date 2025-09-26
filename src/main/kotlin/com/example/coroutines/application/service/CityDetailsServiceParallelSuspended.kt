@@ -11,28 +11,28 @@ import kotlinx.coroutines.runBlocking
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
-@Service("parallel")
-class CityDetailsServiceParallel(
+@Service("suspendedAndParallel")
+class CityDetailsServiceParallelSuspended(
     private val findNewsOutput: FindCityNewsOutputPort,
     private val findCityWeatherOutput: FindCityWeatherOutputPort,
     private val findCityGeoRefOutputPort: FindCityGeoRefOutputPort
 ) : FetchUserDetailsInputPort {
 
-    private val logger = LoggerFactory.getLogger(CityDetailsServiceParallel::class.java)
+    private val logger = LoggerFactory.getLogger(CityDetailsServiceParallelSuspended::class.java)
 
     override fun filteringBy(query: String): CityDetails = runBlocking {
-        logger.info("finding city details using parallel service.")
+        logger.info("finding city details using parallel - suspended service.")
 
         val weather = async(Dispatchers.IO) {
-            findCityWeatherOutput.filteringBy(query)
+            fetchWeather(query)
         }
 
         val coordinates = async(Dispatchers.IO) {
-            findCityGeoRefOutputPort.filteringBy(query)
+            fetchGeoCoordinates(query)
         }
 
         val news = async(Dispatchers.IO) {
-            findNewsOutput.filteringBy(query)
+            fetchNews(query)
         }
 
         CityDetails.of(
@@ -42,4 +42,11 @@ class CityDetailsServiceParallel(
             news = news.await()
         )
     }
+
+    suspend fun fetchWeather(query: String) = findCityWeatherOutput.filteringBy(query)
+
+    suspend fun fetchGeoCoordinates(query: String) = findCityGeoRefOutputPort.filteringBy(query)
+
+    suspend fun fetchNews(query: String) = findNewsOutput.filteringBy(query)
+
 }
