@@ -5,11 +5,15 @@ spring:
 # external endpoints configs
 external:
   news:
-    mode: newsdataio
+    mode: fallback #options [newsdataio, fallback]
     newsdataio:
       url: https://newsdata.io/api/1/news
       token: ${NEWSDATAIO_TOKEN}
       size: 10
+  geo:
+    mode: nominatim #options [nominatim, fallback]
+    nominatim:
+      url: https://nominatim.openstreetmap.org/
   weather:
     url: https://api.openweathermap.org/data/2.5/weather
     token: ${WEATHER_TOKEN}

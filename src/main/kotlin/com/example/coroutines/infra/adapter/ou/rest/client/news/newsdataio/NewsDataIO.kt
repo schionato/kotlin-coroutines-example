@@ -1,7 +1,7 @@
 package com.example.coroutines.infra.adapter.ou.rest.client.news.newsdataio
 
+import com.example.coroutines.infra.adapter.ou.rest.DisableCache
 import com.example.coroutines.infra.adapter.ou.rest.client.news.NewsClient
-import feign.Headers
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,11 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable
 )
 interface NewsDataIO : NewsClient {
 
-    @Headers(
-        "Cache-Control: no-cache, no-store, must-revalidate",
-        "Pragma: no-cache",
-        "Expires: 0"
-    )
+    @DisableCache
     @GetMapping("?country=br&q={city}&size=10")
     override fun fetch(@PathVariable("city") city: String): NewsDataIOResponse
 
