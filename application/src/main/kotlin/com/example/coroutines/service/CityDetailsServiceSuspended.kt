@@ -28,9 +28,9 @@ class CityDetailsServiceSuspended(
         )
     }
 
-    suspend fun fetchWeather(query: String) = findCityWeatherOutput.filteringBy(query)
+    fun fetchWeather(query: String) = findCityWeatherOutput.filteringBy(query)
 
-    suspend fun fetchGeoCoordinates(query: String) = findCityGeoRefOutputPort.filteringBy(query)
+    fun fetchGeoCoordinates(query: String) = findCityGeoRefOutputPort.filteringBy(query)
 
-    suspend fun fetchNews(query: String) = findNewsOutput.filteringBy(query)
+    fun fetchNews(query: String) = findNewsOutput.filteringBy(query)
 }

@@ -37,7 +37,7 @@ class CityDetailsControllerTest {
         @EnumSource(FetchType::class)
         fun findUsingParallel(type: FetchType) {
 
-            for (i in 0 until 15) {
+            (0 until 15).forEach { i ->
                 chronometer.start()
 
                 doRequest(type.name, "Campinas")
