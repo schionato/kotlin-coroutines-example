@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable
     configuration = [NewsDataIOConfig::class]
 )
 @WhenNewsDataIsActive
-interface NewsDataIOAPI {
+fun interface NewsDataIOAPI {
 
     @GetMapping("?country=br&q={city}&size=10")
     fun fetch(@PathVariable("city") city: String): NewsDataIOResponse
