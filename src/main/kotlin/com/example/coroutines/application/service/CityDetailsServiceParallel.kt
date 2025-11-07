@@ -5,6 +5,7 @@ import com.example.coroutines.application.port.ou.FindCityGeoRefOutputPort
 import com.example.coroutines.application.port.ou.FindCityNewsOutputPort
 import com.example.coroutines.application.port.ou.FindCityWeatherOutputPort
 import com.example.coroutines.domain.CityDetails
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
@@ -15,7 +16,8 @@ import org.springframework.stereotype.Service
 class CityDetailsServiceParallel(
     private val findNewsOutput: FindCityNewsOutputPort,
     private val findCityWeatherOutput: FindCityWeatherOutputPort,
-    private val findCityGeoRefOutputPort: FindCityGeoRefOutputPort
+    private val findCityGeoRefOutputPort: FindCityGeoRefOutputPort,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : FetchUserDetailsInputPort {
 
     private val logger = LoggerFactory.getLogger(CityDetailsServiceParallel::class.java)
@@ -23,15 +25,15 @@ class CityDetailsServiceParallel(
     override fun filteringBy(query: String): CityDetails = runBlocking {
         logger.info("finding city details using parallel service.")
 
-        val weather = async(Dispatchers.IO) {
+        val weather = async(dispatcher) {
             findCityWeatherOutput.filteringBy(query)
         }
 
-        val coordinates = async(Dispatchers.IO) {
+        val coordinates = async(dispatcher) {
             findCityGeoRefOutputPort.filteringBy(query)
         }
 
-        val news = async(Dispatchers.IO) {
+        val news = async(dispatcher) {
             findNewsOutput.filteringBy(query)
         }
 
