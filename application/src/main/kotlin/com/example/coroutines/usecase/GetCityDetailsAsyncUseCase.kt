@@ -1,32 +1,29 @@
-package com.example.coroutines.service
+package com.example.coroutines.usecase
 
-import com.example.coroutines.domain.CityDetails
-import com.example.coroutines.port.`in`.FetchUserDetailsInputPort
+import com.example.coroutines.port.`in`.GetCityDetailsInputPort
 import com.example.coroutines.port.ou.FindCityGeoRefOutputPort
 import com.example.coroutines.port.ou.FindCityNewsOutputPort
 import com.example.coroutines.port.ou.FindCityWeatherOutputPort
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
+import com.example.coroutines.domain.CityDetails
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
-class CityDetailsServiceParallel(
-    private val findNewsOutput: FindCityNewsOutputPort,
+class GetCityDetailsAsyncUseCase(
     private val findCityWeatherOutput: FindCityWeatherOutputPort,
     private val findCityGeoRefOutputPort: FindCityGeoRefOutputPort,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
-) : FetchUserDetailsInputPort {
+    private val findNewsOutput: FindCityNewsOutputPort
+) : GetCityDetailsInputPort {
 
     override fun filteringBy(query: String): CityDetails = runBlocking {
-        val weather = async(dispatcher) {
+        val weather = async {
             findCityWeatherOutput.filteringBy(query)
         }
 
-        val coordinates = async(dispatcher) {
+        val coordinates = async {
             findCityGeoRefOutputPort.filteringBy(query)
         }
 
-        val news = async(dispatcher) {
+        val news = async {
             findNewsOutput.filteringBy(query)
         }
 
@@ -37,4 +34,5 @@ class CityDetailsServiceParallel(
             news = news.await()
         )
     }
+
 }

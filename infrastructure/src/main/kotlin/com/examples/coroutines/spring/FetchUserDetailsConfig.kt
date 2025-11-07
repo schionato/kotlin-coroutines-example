@@ -1,13 +1,13 @@
 package com.examples.coroutines.spring
 
-import com.example.coroutines.port.`in`.FetchUserDetailsInputPort
+import com.example.coroutines.port.`in`.GetCityDetailsInputPort
 import com.example.coroutines.port.ou.FindCityGeoRefOutputPort
 import com.example.coroutines.port.ou.FindCityNewsOutputPort
 import com.example.coroutines.port.ou.FindCityWeatherOutputPort
-import com.example.coroutines.service.CityDetailsServiceAsync
-import com.example.coroutines.service.CityDetailsServiceParallel
-import com.example.coroutines.service.CityDetailsServiceSuspended
-import com.example.coroutines.service.CityDetailsServiceSync
+import com.example.coroutines.usecase.GetCityDetailsAsyncUseCase
+import com.example.coroutines.usecase.GetCityDetailsParallelUseCase
+import com.example.coroutines.usecase.GetCityDetailsSuspendedUseCase
+import com.example.coroutines.usecase.GetCityDetailsSyncUseCase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -19,28 +19,28 @@ class FetchUserDetailsConfig (
 ) {
 
     @Bean("async")
-    fun async() : FetchUserDetailsInputPort = CityDetailsServiceAsync(
+    fun async() : GetCityDetailsInputPort = GetCityDetailsAsyncUseCase(
         findCityWeatherOutput = findCityWeatherOutput,
         findCityGeoRefOutputPort = findCityGeoRefOutputPort,
         findNewsOutput = findNewsOutput
     )
 
     @Bean("sync")
-    fun sync() : FetchUserDetailsInputPort = CityDetailsServiceSync(
+    fun sync() : GetCityDetailsInputPort = GetCityDetailsSyncUseCase(
         findCityWeatherOutput = findCityWeatherOutput,
         findCityGeoRefOutputPort = findCityGeoRefOutputPort,
         findNewsOutput = findNewsOutput
     )
 
     @Bean("parallel")
-    fun parallel() : FetchUserDetailsInputPort = CityDetailsServiceParallel(
+    fun parallel() : GetCityDetailsInputPort = GetCityDetailsParallelUseCase(
         findCityWeatherOutput = findCityWeatherOutput,
         findCityGeoRefOutputPort = findCityGeoRefOutputPort,
         findNewsOutput = findNewsOutput
     )
 
     @Bean("suspended")
-    fun suspended() : FetchUserDetailsInputPort = CityDetailsServiceSuspended(
+    fun suspended() : GetCityDetailsInputPort = GetCityDetailsSuspendedUseCase(
         findCityWeatherOutput = findCityWeatherOutput,
         findCityGeoRefOutputPort = findCityGeoRefOutputPort,
         findNewsOutput = findNewsOutput
