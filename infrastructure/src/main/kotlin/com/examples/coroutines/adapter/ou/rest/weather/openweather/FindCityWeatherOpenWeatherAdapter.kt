@@ -1,0 +1,13 @@
+package com.examples.coroutines.adapter.ou.rest.weather.openweather
+
+import com.example.coroutines.port.ou.FindCityWeatherOutputPort
+import com.examples.coroutines.adapter.ou.rest.weather.openweather.client.OpenWeatherMapAPI
+import org.springframework.stereotype.Repository
+
+@Repository
+@WhenOpenWeatherIsActive
+class FindCityWeatherOpenWeatherAdapter(val weatherClient: OpenWeatherMapAPI) : FindCityWeatherOutputPort {
+
+    override fun filteringBy(query: String) = weatherClient.fetch(query).toWeather()
+
+}

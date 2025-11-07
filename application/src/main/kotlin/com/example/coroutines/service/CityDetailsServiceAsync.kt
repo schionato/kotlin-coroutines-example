@@ -7,21 +7,14 @@ import com.example.coroutines.port.ou.FindCityWeatherOutputPort
 import com.example.coroutines.domain.CityDetails
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Service
 
-@Service("async")
 class CityDetailsServiceAsync(
     private val findCityWeatherOutput: FindCityWeatherOutputPort,
     private val findCityGeoRefOutputPort: FindCityGeoRefOutputPort,
     private val findNewsOutput: FindCityNewsOutputPort
 ) : FetchUserDetailsInputPort {
 
-    private val logger = LoggerFactory.getLogger(CityDetailsServiceAsync::class.java)
-
     override fun filteringBy(query: String): CityDetails = runBlocking {
-        logger.info("finding city details using async service.")
-
         val weather = async {
             findCityWeatherOutput.filteringBy(query)
         }
