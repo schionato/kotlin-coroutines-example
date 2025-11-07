@@ -1,4 +1,4 @@
-package com.example.coroutines.application.port.`in`
+package com.example.coroutines.port.`in`
 
 import com.example.coroutines.domain.CityDetails
 

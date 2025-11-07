@@ -1,6 +1,6 @@
 package com.example.coroutines.infra.adapter.ou.rest.geo.fallback
 
-import com.example.coroutines.application.port.ou.FindCityGeoRefOutputPort
+import com.example.coroutines.port.ou.FindCityGeoRefOutputPort
 import com.example.coroutines.domain.Coordinates
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking

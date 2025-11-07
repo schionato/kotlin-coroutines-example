@@ -22,11 +22,13 @@ repositories {
 extra["springCloudVersion"] = "2025.0.0"
 dependencies {
     implementation(project(":core"))
+    implementation(project(":application"))
 
 	implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
 
     //Circuit breaker dependencies
     implementation("io.github.resilience4j:resilience4j-spring-boot3")
@@ -34,7 +36,6 @@ dependencies {
 
     //Feign client dependencies
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
 
     //Test dependencies
     testImplementation("org.springframework.boot:spring-boot-starter-test")

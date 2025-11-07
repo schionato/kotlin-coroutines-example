@@ -1,6 +1,6 @@
 package com.example.coroutines.infra.adapter.`in`.rest
 
-import com.example.coroutines.application.port.`in`.FetchUserDetailsInputPort
+import com.example.coroutines.port.`in`.FetchUserDetailsInputPort
 import com.example.coroutines.infra.adapter.`in`.rest.dto.CityDetailsResponse
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.web.bind.annotation.GetMapping
@@ -12,8 +12,7 @@ enum class FetchType {
     SYNC,
     ASYNC,
     SUSPENDED,
-    PARALLEL,
-    PARALLEL_AND_SUSPENDED
+    PARALLEL
 }
 
 @RestController
@@ -22,8 +21,7 @@ class CityDetailsController(
     @param:Qualifier("sync") val fetchUserDetailsInputPortSync: FetchUserDetailsInputPort,
     @param:Qualifier("async") val fetchUserDetailsInputPortAsync: FetchUserDetailsInputPort,
     @param:Qualifier("parallel") val fetchUserDetailsInputPortParallel: FetchUserDetailsInputPort,
-    @param:Qualifier("suspended") val fetchUserDetailsInputPortSuspended: FetchUserDetailsInputPort,
-    @param:Qualifier("suspendedAndParallel") val fetchUserDetailsInputPortParallelAndSuspended: FetchUserDetailsInputPort,
+    @param:Qualifier("suspended") val fetchUserDetailsInputPortSuspended: FetchUserDetailsInputPort
 ) {
 
     @GetMapping
@@ -35,7 +33,6 @@ class CityDetailsController(
             FetchType.SYNC -> fetchUserDetailsInputPortSync.filteringBy(query)
             FetchType.ASYNC -> fetchUserDetailsInputPortAsync.filteringBy(query)
             FetchType.PARALLEL -> fetchUserDetailsInputPortParallel.filteringBy(query)
-            FetchType.PARALLEL_AND_SUSPENDED -> fetchUserDetailsInputPortParallelAndSuspended.filteringBy(query)
             FetchType.SUSPENDED -> fetchUserDetailsInputPortSuspended.filteringBy(query)
         }
         return CityDetailsResponse.of(found)

@@ -1,6 +1,6 @@
 package com.example.coroutines.infra.adapter.ou.rest.news.fallback
 
-import com.example.coroutines.application.port.ou.FindCityNewsOutputPort
+import com.example.coroutines.port.ou.FindCityNewsOutputPort
 import com.example.coroutines.domain.Article
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking

@@ -1,6 +1,6 @@
 package com.example.coroutines.infra.adapter.ou.rest.news.newsdataio
 
-import com.example.coroutines.application.port.ou.FindCityNewsOutputPort
+import com.example.coroutines.port.ou.FindCityNewsOutputPort
 import com.example.coroutines.domain.Article
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker
 import org.slf4j.LoggerFactory

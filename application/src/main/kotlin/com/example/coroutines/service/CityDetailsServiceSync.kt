@@ -1,9 +1,9 @@
-package com.example.coroutines.application.service
+package com.example.coroutines.service
 
-import com.example.coroutines.application.port.`in`.FetchUserDetailsInputPort
-import com.example.coroutines.application.port.ou.FindCityGeoRefOutputPort
-import com.example.coroutines.application.port.ou.FindCityNewsOutputPort
-import com.example.coroutines.application.port.ou.FindCityWeatherOutputPort
+import com.example.coroutines.port.`in`.FetchUserDetailsInputPort
+import com.example.coroutines.port.ou.FindCityGeoRefOutputPort
+import com.example.coroutines.port.ou.FindCityNewsOutputPort
+import com.example.coroutines.port.ou.FindCityWeatherOutputPort
 import com.example.coroutines.domain.CityDetails
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service

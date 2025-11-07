@@ -1,6 +1,6 @@
 package com.example.coroutines.infra.adapter.ou.rest.weather.openweather
 
-import com.example.coroutines.application.port.ou.FindCityWeatherOutputPort
+import com.example.coroutines.port.ou.FindCityWeatherOutputPort
 import com.example.coroutines.infra.adapter.ou.rest.weather.openweather.client.OpenWeatherMapAPI
 import org.springframework.stereotype.Repository
 

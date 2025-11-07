@@ -1,6 +1,6 @@
 package com.example.coroutines.infra.adapter.ou.rest.weather.fallback
 
-import com.example.coroutines.application.port.ou.FindCityWeatherOutputPort
+import com.example.coroutines.port.ou.FindCityWeatherOutputPort
 import com.example.coroutines.domain.Weather
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking

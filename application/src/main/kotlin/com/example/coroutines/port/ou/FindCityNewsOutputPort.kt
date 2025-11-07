@@ -1,8 +1,8 @@
-package com.example.coroutines.application.port.ou
+package com.example.coroutines.port.ou
 
 import com.example.coroutines.domain.Article
 
-interface FindCityNewsOutputPort {
+fun interface FindCityNewsOutputPort {
 
     fun filteringBy(query: String): List<Article>
 
