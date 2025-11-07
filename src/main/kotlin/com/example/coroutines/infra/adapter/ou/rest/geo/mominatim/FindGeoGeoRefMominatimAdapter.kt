@@ -12,7 +12,7 @@ class FindGeoGeoRefMominatimAdapter(val geoRefClient: MominatimAPI) : FindCityGe
     override fun filteringBy(query: String): Coordinates {
         val found = geoRefClient.fetch(query)
         if (found.isEmpty())
-            return Coordinates.Companion.empty()
+            return Coordinates.empty()
         return found[0].toCoordinate()
     }
 }

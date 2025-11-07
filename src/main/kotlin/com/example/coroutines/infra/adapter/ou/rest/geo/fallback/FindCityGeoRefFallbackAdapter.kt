@@ -17,7 +17,7 @@ class FindCityGeoRefFallbackAdapter : FindCityGeoRefOutputPort {
 
     override fun filteringBy(query: String): Coordinates {
         runBlocking { delay(250) }
-        return Coordinates.Companion.empty()
+        return Coordinates.empty()
     }
 
 }
